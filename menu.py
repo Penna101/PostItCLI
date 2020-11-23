@@ -84,7 +84,7 @@ def acessar_quadro(quadro: Quadro):
 
 
 def editar_postIt(postIt: PostIt):
-    print("Editar o PostIt: {:02d} {}".format(postIt.get_posicao(), postIt.get_titulo()))
+    print("Editar o PostIt: {:02d} - {}".format(postIt.get_posicao(), postIt.get_titulo()))
     print("(1) Trocar de Posição")
     print("(2) Alterar Título")
     print("(3) Alterar Anotação")

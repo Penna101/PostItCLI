@@ -31,8 +31,9 @@ while escolha != menu.Escolhas.SAIR:
         # Necessário digitar o nome do quadro que deseja acessar, o programa irá pesquisar nos arquivos .json
         elif escolha == menu.Escolhas.ACESSAR_QUADRO:
             quadro = arquivoService.abrir_arquivo(input("Nome quadro: "))
-            menu.acessar_quadro(quadro)
-            menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
+            if quadro is not None:
+                menu.acessar_quadro(quadro)
+                menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
 
     # Menu quando tem um quadro selecionado
     elif menu_atual == menu.Escolhas.MENU_ESCOLHAS_QUADRO:
@@ -99,12 +100,14 @@ while escolha != menu.Escolhas.SAIR:
                     menu.acessar_quadro(quadro)
 
         elif escolha == menu.Escolhas.ACESSAR_OUTRO_QUADRO:
-            quadro = arquivoService.abrir_arquivo(input("Nome quadro: "))
-            menu.acessar_quadro(quadro)
-            menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
+            quadro_novo = arquivoService.abrir_arquivo(input("Nome quadro: "))
+            if quadro_novo is not None:
+                quadro = quadro_novo
+                menu.acessar_quadro(quadro)
+                menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
 
     # Mostra as escolhas possíveis dependendo de qual o menu atual
     if menu_atual == menu.Escolhas.MENU_INICIAL:
-        menu.escolhas_inicial()
+        escolha = menu.escolhas_inicial()
     elif menu_atual == menu.Escolhas.MENU_ESCOLHAS_QUADRO:
         escolha = menu.escolhas()

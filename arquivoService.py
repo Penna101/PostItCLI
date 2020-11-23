@@ -25,15 +25,17 @@ def abrir_arquivo(nome_arquivo: str):
     if not nome_arquivo.endswith('.json'):
         nome_arquivo = nome_arquivo + '.json'
 
-    with open('quadros/' + nome_arquivo) as json_arquivo:
-        data = json.load(json_arquivo)
+    try:
+        with open('quadros/' + nome_arquivo) as json_arquivo:
+            data = json.load(json_arquivo)
 
-        quadro = Quadro(data['nome'])
+            quadro = Quadro(data['nome'])
 
-        for str_post in data['postIts']:
-            data_post = json.loads(str_post)
-            post = PostIt(data_post['titulo'], data_post['notas'], data_post['posicao'])
-            quadro.add_postIt(post)
-
-    print(quadro)
+            for str_post in data['postIts']:
+                data_post = json.loads(str_post)
+                post = PostIt(data_post['titulo'], data_post['notas'], data_post['posicao'])
+                quadro.add_postIt(post)
+    except:
+        print("Quadro não pode ser encontrado!\n")
+        return None
     return quadro
