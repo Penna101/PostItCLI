@@ -1,5 +1,6 @@
 import os
 import buffer
+import math
 from quadro import Quadro
 from postIt import PostIt
 
@@ -71,9 +72,15 @@ def acessar_quadro(quadro: Quadro):
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
     linhas_posts = []
-    for post in quadro.get_all_postIt():
-        linhas_posts.append(post.linhas_post)
-    buffer.imprimir_posts_coloridos(linhas_posts)
+    cont = 0
+    for linha in range(0, math.ceil(len(quadro.get_all_postIt()) / 3)):
+        linhas_posts.append([[], [], []])
+        for coluna in range(0, 3):
+            if cont < len(quadro.get_all_postIt()):
+                linhas_posts[linha][coluna] = quadro.get_postIt(cont)
+                cont += 1
+
+    buffer.imprimir_posts_coloridos_matriz(linhas_posts)
 
 
 def editar_postIt(postIt: PostIt):

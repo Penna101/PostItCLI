@@ -22,8 +22,8 @@ python3.8 app.py
 ## O Sistema Deve Conter:
 - uso de Estruturas de Seleção ✅;
 - uso de Estruturas de Repetição ✅;
-- uso de Lista/ListaComposta/Matriz ✅/❌/❌;
-- uso de Dicionário ✅;
+- uso de Lista/ListaComposta/Matriz ✅/✅/✅;
+- uso de Dicionário ❌;
 - exemplo/uso de Instanciação ✅;
 - exemplo/uso de Herança ❌;
 - exemplo/uso Associação (Agregação ou Composição) ✅;

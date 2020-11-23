@@ -98,6 +98,11 @@ while escolha != menu.Escolhas.SAIR:
                 elif escolha_edit == menu.Escolhas.SAIR:
                     menu.acessar_quadro(quadro)
 
+        elif escolha == menu.Escolhas.ACESSAR_OUTRO_QUADRO:
+            quadro = arquivoService.abrir_arquivo(input("Nome quadro: "))
+            menu.acessar_quadro(quadro)
+            menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
+
     # Mostra as escolhas possíveis dependendo de qual o menu atual
     if menu_atual == menu.Escolhas.MENU_INICIAL:
         menu.escolhas_inicial()
