@@ -6,9 +6,7 @@ class Quadro:
 
     def add_postIt(self, postIt):
         self.__postIts.append(postIt)
-
-    def add_postIt_index(self, postIt, i):
-        self.__postIts.insert(i, postIt)
+        self.__postIts.sort(key=lambda post: post.get_posicao())
 
     def set_postIts(self, postIts):
         self.__postIts = []

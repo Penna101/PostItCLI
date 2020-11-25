@@ -2,8 +2,6 @@ from quadro import Quadro
 
 
 def validar_entrada_postIt(titulo: str, anotacao: str, data_limite: str):
-    if len(data_limite.replace(" ", "")) == 0:
-        data_limite = None
     if len(titulo) > 26:
         print("\nNome Inválido: Grande demais o limite é de 26 caracteres!\n")
         return "", "", None, True
@@ -14,6 +12,8 @@ def validar_entrada_postIt(titulo: str, anotacao: str, data_limite: str):
         print("\nData Limite Inválida: A descrição da data limite é de no máximo 13 caracteres!\n")
         return "", "", None, True
     else:
+        if len(data_limite.replace(" ", "")) == 0:
+            data_limite = None
         return titulo, anotacao, data_limite, False
 
 

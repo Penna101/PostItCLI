@@ -1,9 +1,10 @@
-import colorama
-import os
-import buffer
 import math
-from quadro import Quadro
+import os
+
+import buffer
+from colorama import Fore, Style
 from postIt import PostIt
+from quadro import Quadro
 
 
 class Escolhas:
@@ -30,47 +31,69 @@ def inicializar():
 
 def nome_app():
     limpar_tela()
+    print(Fore.CYAN)
     print(
         "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
         "\n                                     SISTEMA DE LEMBRETES VIRTUAIS CRIADO POR JOÃO PENNA ZANDONAI" +
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print(Style.RESET_ALL)
 
 
 def escolhas_inicial():
+    print(Fore.LIGHTWHITE_EX, end="")
     print("(1) Cadastrar um novo Quadro")
     print("(2) Acessar um Quadro")
     print("(5) Sair do Programa")
+
     return int(input("\nQual opção deseja acessar? "))
 
 
 def escolhas():
+    print(Fore.LIGHTWHITE_EX, end="")
     print("(1) Cadastrar um novo PostIt")
     print("(2) Editar um PostIt")
     print("(3) Acessar outro Quadro")
     print("(5) Sair do Programa")
+
+    return int(input("\nQual opção deseja acessar? "))
+
+
+def escolhas_editar_postIt(postIt: PostIt):
+    print(Fore.LIGHTWHITE_EX, end="")
+    print("Editar o PostIt: {:02d} - {}".format(postIt.get_posicao(), postIt.get_titulo()))
+    print("(1) Trocar de Posição")
+    print("(2) Alterar Título")
+    print("(3) Alterar Anotação")
+    print("(5) Sair Edição")
+
     return int(input("\nQual opção deseja acessar? "))
 
 
 def cadastrar_quadro():
     limpar_tela()
+    print(Fore.CYAN)
     print(
         "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n                                      CADASTRAR NOVO QUADRO"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print(Style.RESET_ALL)
 
 
 def acessar_quadro(quadro: Quadro):
     limpar_tela()
+    print(Fore.LIGHTGREEN_EX)
+    print("\n{:{align}{width}}".format("Você está Visualizando o Quadro:", align="^", width=126))
     print(
         "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
         "\n{:{align}{width}}".format(quadro.get_nome().upper(), align="^", width=126) +
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print(Style.RESET_ALL)
 
     linhas_posts = []
     cont = 0
@@ -82,16 +105,6 @@ def acessar_quadro(quadro: Quadro):
                 cont += 1
 
     buffer.imprimir_posts_coloridos_matriz(linhas_posts)
-
-
-def editar_postIt(postIt: PostIt):
-    print("Editar o PostIt: {:02d} - {}".format(postIt.get_posicao(), postIt.get_titulo()))
-    print("(1) Trocar de Posição")
-    print("(2) Alterar Título")
-    print("(3) Alterar Anotação")
-    print("(5) Sair Edição")
-
-    return int(input("\nQual opção deseja acessar? "))
 
 
 def limpar_tela():

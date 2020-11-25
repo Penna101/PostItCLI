@@ -61,7 +61,7 @@ while escolha != menu.Escolhas.SAIR:
             posicao_post = int(input("Posição do Post It a Editar(Posição é o número entre () ao lado do título): "))
             postIt, erro = validador.encontra_post(quadro, posicao_post)
             if erro is False:
-                escolha_edit = menu.editar_postIt(postIt)
+                escolha_edit = menu.escolhas_editar_postIt(postIt)
 
                 # Edição de posição, troca de posição com outro Post It
                 if escolha_edit == menu.Escolhas.EDIT_POSICAO:
@@ -80,15 +80,15 @@ while escolha != menu.Escolhas.SAIR:
                         postIt.set_posicao(nova_posicao)
 
                         # Adiciona na lista de post its em quadro na posição nova deles
-                        quadro.add_postIt_index(postIt, postIt.get_posicao() - 1)
-                        quadro.add_postIt_index(post_troca, post_troca.get_posicao() - 1)
+                        quadro.add_postIt(postIt)
+                        quadro.add_postIt(post_troca)
 
                         arquivoService.salvar_quadro(quadro)
                         menu.acessar_quadro(quadro)
 
                 elif escolha_edit == menu.Escolhas.EDIT_TITULO:
                     novo_titulo = input("Digite o novo título: ")
-                    novo_titulo, dump, erro_edit = validador.validar_entrada_postIt(novo_titulo, "")
+                    novo_titulo, dump, erro_edit = validador.validar_entrada_postIt(novo_titulo, "", "")
                     if erro_edit is False:
                         postIt.set_titulo(novo_titulo)
                         arquivoService.salvar_quadro(quadro)
@@ -96,7 +96,7 @@ while escolha != menu.Escolhas.SAIR:
 
                 elif escolha_edit == menu.Escolhas.EDIT_NOTAS:
                     nova_anotacao = input("Digite a nova anotação:\n")
-                    dump, nova_anotacao, erro_edit = validador.validar_entrada_postIt("", nova_anotacao)
+                    dump, nova_anotacao, erro_edit = validador.validar_entrada_postIt("", nova_anotacao, "")
                     if erro_edit is False:
                         postIt.set_notas(nova_anotacao)
                         arquivoService.salvar_quadro(quadro)

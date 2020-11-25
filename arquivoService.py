@@ -2,6 +2,7 @@ from quadro import Quadro
 from postIt import PostIt
 from postItDatado import PostItDatado
 import json
+import os
 
 
 def salvar_quadro(quadro: Quadro):
@@ -18,11 +19,13 @@ def salvar_quadro(quadro: Quadro):
         if isinstance(post, PostItDatado):
             data_post['data_limite'] = post.get_data_limite()
 
-        data['postIts'].append(
-            json.dumps(data_post))
+        data['postIts'].append(data_post)
+
+    if not os.path.exists('quadros'):
+        os.mkdir("quadros")
 
     with open('quadros/' + nome_arquivo, 'w') as out:
-        json.dump(data, out)
+        json.dump(data, out, indent=4)
 
 
 def abrir_arquivo(nome_arquivo: str):
@@ -38,7 +41,7 @@ def abrir_arquivo(nome_arquivo: str):
             quadro = Quadro(data['nome'])
 
             for str_post in data['postIts']:
-                data_post = json.loads(str_post)
+                data_post = str_post
 
                 if data_post['data_limite'] is not None:
                     post = PostItDatado(data_post['titulo'], data_post['notas'], data_post['data_limite'],
@@ -46,6 +49,7 @@ def abrir_arquivo(nome_arquivo: str):
                 else:
                     post = PostIt(data_post['titulo'], data_post['notas'], data_post['posicao'])
                 quadro.add_postIt(post)
+                # quadro.get_all_postIt().sort(key=lambda post: post.get_posicao(), reverse=True)
     except:
         print("Quadro não pode ser encontrado!\n")
         return None
