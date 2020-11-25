@@ -17,11 +17,14 @@ class Escolhas:
 
     CADASTRO_POSTIT = 1
     EDITAR_POSTIT = 2
-    ACESSAR_OUTRO_QUADRO = 3
+    REMOVER_POSTIT = 3
+    ACESSAR_OUTRO_QUADRO = 4
 
     EDIT_POSICAO = 1
     EDIT_TITULO = 2
     EDIT_NOTAS = 3
+    EDIT_DATA_LIMITE = 4
+
 
 
 def inicializar():
@@ -54,7 +57,8 @@ def escolhas():
     print(Fore.LIGHTWHITE_EX, end="")
     print("(1) Cadastrar um novo PostIt")
     print("(2) Editar um PostIt")
-    print("(3) Acessar outro Quadro")
+    print("(3) Remover um PostIt")
+    print("(4) Acessar outro Quadro")
     print("(5) Sair do Programa")
 
     return int(input("\nQual opção deseja acessar? "))
@@ -66,6 +70,7 @@ def escolhas_editar_postIt(postIt: PostIt):
     print("(1) Trocar de Posição")
     print("(2) Alterar Título")
     print("(3) Alterar Anotação")
+    print("(4) Alterar Data Limite")
     print("(5) Sair Edição")
 
     return int(input("\nQual opção deseja acessar? "))

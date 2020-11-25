@@ -14,6 +14,10 @@ class PostItDatado(PostIt):
     def set_data_limite(self, data_limite):
         self.__data_limite = data_limite
 
+    def set_posicao(self, posicao):
+        super().set_posicao(posicao)
+        self.__diagramar_nota()
+
     def __diagramar_nota(self):
         if self.get_notas() is not None:
             self.linhas_notas = []

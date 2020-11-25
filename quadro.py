@@ -26,3 +26,7 @@ class Quadro:
 
     def set_nome(self, nome):
         self.__nome = nome
+
+    def organizar_posicao(self):
+        for post in self.__postIts:
+            post.set_posicao(self.__postIts.index(post) + 1)
