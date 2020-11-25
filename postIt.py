@@ -1,12 +1,13 @@
 class PostIt:
 
-    def __init__(self, titulo, notas, posicao=0):
+    def __init__(self, titulo, notas, posicao=0, isDiagramarAuto=True):
         self.__titulo = str(titulo).upper()
         self.__notas = str(notas)
         self.linhas_notas = []
         self.linhas_post = []
         self.__posicao = posicao
-        self.__diagramar_nota()
+        if isDiagramarAuto:
+            self.__diagramar_nota()
 
     def imprimir_post(self):
         for linha in self.linhas_post:

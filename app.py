@@ -1,4 +1,5 @@
 from postIt import PostIt
+from postItDatado import PostItDatado
 from quadro import Quadro
 import menu
 import arquivoService
@@ -40,19 +41,24 @@ while escolha != menu.Escolhas.SAIR:
 
         # Cadastrar um post It com validação de tamanho para o título e anotação
         if escolha == menu.Escolhas.CADASTRO_POSTIT:
-            titulo, notas, erro = \
+            titulo, notas, data_limite, erro = \
                 validador.validar_entrada_postIt(
                     input("(Opcional)Título do Post It (Máx 26 char): "),
-                    input("Anotação(Maxímo de 240 caracteres):\n"))
+                    input("Anotação(Maxímo de 240 caracteres):\n"),
+                    input("(Opcional)Data Limite do Post It: "))
             if erro is False:
-                postIt = PostIt(titulo, notas, 1 + len(quadro.get_all_postIt()))
+                postIt = None
+                if data_limite is not None:
+                    postIt = PostItDatado(titulo, notas, data_limite, 1 + len(quadro.get_all_postIt()))
+                else:
+                    postIt = PostIt(titulo, notas, 1 + len(quadro.get_all_postIt()))
                 quadro.add_postIt(postIt)
                 menu.acessar_quadro(quadro)
                 arquivoService.salvar_quadro(quadro)
 
         # Encontra um PostIt para edição pela posição dele
         elif escolha == menu.Escolhas.EDITAR_POSTIT:
-            posicao_post = int(input("Posição do Post It a Editar(Posição é o número entre () ao lado do título: "))
+            posicao_post = int(input("Posição do Post It a Editar(Posição é o número entre () ao lado do título): "))
             postIt, erro = validador.encontra_post(quadro, posicao_post)
             if erro is False:
                 escolha_edit = menu.editar_postIt(postIt)

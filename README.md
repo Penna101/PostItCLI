@@ -25,6 +25,6 @@ python3.8 app.py
 - uso de Lista/ListaComposta/Matriz ✅/✅/✅;
 - uso de Dicionário ✅;
 - exemplo/uso de Instanciação ✅;
-- exemplo/uso de Herança ❌;
+- exemplo/uso de Herança ✅;
 - exemplo/uso Associação (Agregação ou Composição) ✅;
-- uso de Polimorfismo ❌;
+- uso de Polimorfismo ✅;
