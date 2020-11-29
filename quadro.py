@@ -18,8 +18,8 @@ class Quadro:
     def get_all_postIt(self):
         return self.__postIts
 
-    def remove_postIt(self, post):
-        self.__postIts.remove(post)
+    def remove_postIt(self, postIt):
+        self.__postIts.remove(postIt)
 
     def get_nome(self):
         return self.__nome
