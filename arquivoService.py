@@ -50,7 +50,9 @@ def abrir_arquivo(nome_arquivo: str):
                     post = PostIt(data_post['titulo'], data_post['notas'], data_post['posicao'])
                 quadro.add_postIt(post)
                 # quadro.get_all_postIt().sort(key=lambda post: post.get_posicao(), reverse=True)
-    except:
+    except Exception as e:
+        print(e)
+
         print("Quadro não pode ser encontrado!\n")
         return None
     return quadro

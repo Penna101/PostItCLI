@@ -44,25 +44,37 @@ class PostIt:
         self.__notas = notas
         self.__diagramar_nota()
 
+    def adicionar_linhas_notas(self):
+        i = 30
+        notas = "{:{width}}".format(self.__notas, width=240)
+        while True:
+            if len(notas) > i:
+                self.linhas_notas.append(notas[:i])
+                notas = notas[i:]
+            else:
+                self.linhas_notas.append(notas)
+                break
+
+    def adicionar_linhas_post_conteudo(self):
+        self.linhas_post.append("||({posicao:02d}){titulo:{align}{width}}||".format(posicao=self.__posicao,
+                                                                                    titulo=self.__titulo,
+                                                                                    align="^",
+                                                                                    width="26"))
+        for linha in self.linhas_notas:
+            self.linhas_post.append("||{:{align}{width}}||".format(linha, align="^", width="30"))
+
+    def adicionar_linha_separacao_top(self):
+        self.linhas_post.append("==================================")
+
+    def adicionar_linha_separacao_bottom(self):
+        self.linhas_post.append("==================================")
+
     def __diagramar_nota(self):
         if self.__notas is not None:
             self.linhas_notas = []
             self.linhas_post = []
-            i = 30
-            notas = "{:{width}}".format(self.__notas, width=240)
-            while True:
-                if len(notas) > i:
-                    self.linhas_notas.append(notas[:i])
-                    notas = notas[i:]
-                else:
-                    self.linhas_notas.append(notas)
-                    break
+            self.adicionar_linhas_notas()
 
-            self.linhas_post.append("==================================")
-            self.linhas_post.append("||({posicao:02d}){titulo:{align}{width}}||".format(posicao=self.__posicao,
-                                                                                        titulo=self.__titulo,
-                                                                                        align="^",
-                                                                                        width="26"))
-            for linha in self.linhas_notas:
-                self.linhas_post.append("||{:{align}{width}}||".format(linha, align="^", width="30"))
-            self.linhas_post.append("==================================")
+            self.adicionar_linha_separacao_top()
+            self.adicionar_linhas_post_conteudo()
+            self.adicionar_linha_separacao_bottom()
