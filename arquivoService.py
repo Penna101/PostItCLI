@@ -1,8 +1,10 @@
-from quadro import Quadro
-from postIt import PostIt
-from postItDatado import PostItDatado
 import json
 import os
+
+from colorama import Fore, Style
+from postIt import PostIt
+from postItDatado import PostItDatado
+from quadro import Quadro
 
 
 def salvar_quadro(quadro: Quadro):
@@ -50,9 +52,9 @@ def abrir_arquivo(nome_arquivo: str):
                     post = PostIt(data_post['titulo'], data_post['notas'], data_post['posicao'])
                 quadro.add_postIt(post)
                 # quadro.get_all_postIt().sort(key=lambda post: post.get_posicao(), reverse=True)
-    except Exception as e:
-        print(e)
-
-        print("Quadro não pode ser encontrado!\n")
+    except:
+        print(Fore.RED, end="")
+        print("\nQuadro não pode ser encontrado!\n")
+        print(Style.RESET_ALL, end="")
         return None
     return quadro

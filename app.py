@@ -1,10 +1,9 @@
+import arquivoService
+import menu
+import validador
 from postIt import PostIt
 from postItDatado import PostItDatado
 from quadro import Quadro
-import menu
-import arquivoService
-import validador
-from colorama import Fore, Style
 
 # Mostra o cabeçalho Inicial
 escolha = menu.inicializar()
@@ -36,6 +35,9 @@ while escolha != menu.Escolhas.SAIR:
             if quadro is not None:
                 menu.acessar_quadro(quadro)
                 menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
+
+        else:
+            menu.erro_escolha_novamente()
 
     # Menu quando tem um quadro selecionado
     elif menu_atual == menu.Escolhas.MENU_ESCOLHAS_QUADRO:
@@ -70,7 +72,6 @@ while escolha != menu.Escolhas.SAIR:
                         input("Posição do Post It a trocar de posição com o Post It {}: ".format(postIt.get_posicao())))
                     post_troca, erro_edit = validador.encontra_post(quadro, posicao_post_troca)
                     if erro_edit is False:
-
                         # Remove os dois Post It a serem editados do quadro
                         quadro.remove_postIt(postIt)
                         quadro.remove_postIt(post_troca)
@@ -106,12 +107,14 @@ while escolha != menu.Escolhas.SAIR:
 
                 elif escolha_edit == menu.Escolhas.EDIT_DATA_LIMITE:
                     nova_data_limite = input("Digite a nova data limite:\n")
-                    dump, dump2, nova_data_limite, erro_edit = validador.validar_entrada_postIt("", "", nova_data_limite)
+                    dump, dump2, nova_data_limite, erro_edit = validador.validar_entrada_postIt("", "",
+                                                                                                nova_data_limite)
                     if erro_edit is False:
                         if isinstance(postIt, PostItDatado):
                             postIt.set_data_limite(nova_data_limite)
                         else:
-                            postIt_data = PostItDatado(postIt.get_titulo(), postIt.get_notas(), nova_data_limite, postIt.get_posicao())
+                            postIt_data = PostItDatado(postIt.get_titulo(), postIt.get_notas(), nova_data_limite,
+                                                       postIt.get_posicao())
                             quadro.remove_postIt(postIt)
                             quadro.add_postIt(postIt_data)
                         arquivoService.salvar_quadro(quadro)
@@ -119,6 +122,9 @@ while escolha != menu.Escolhas.SAIR:
 
                 elif escolha_edit == menu.Escolhas.SAIR:
                     menu.acessar_quadro(quadro)
+
+                else:
+                    menu.erro_escolha_novamente()
 
         elif escolha == menu.Escolhas.REMOVER_POSTIT:
             posicao_post = int(input("Posição do Post It a Remover(Posição é o número entre () ao lado do título): "))
@@ -135,6 +141,9 @@ while escolha != menu.Escolhas.SAIR:
                 quadro = quadro_novo
                 menu.acessar_quadro(quadro)
                 menu_atual = menu.Escolhas.MENU_ESCOLHAS_QUADRO
+
+        else:
+            menu.erro_escolha_novamente()
 
     # Mostra as escolhas possíveis dependendo de qual o menu atual
     if menu_atual == menu.Escolhas.MENU_INICIAL:

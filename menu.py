@@ -25,6 +25,7 @@ class Escolhas:
     EDIT_NOTAS = 3
     EDIT_DATA_LIMITE = 4
 
+    ERRO_ENTRADA = 0
 
 
 def inicializar():
@@ -44,13 +45,31 @@ def nome_app():
     print(Style.RESET_ALL)
 
 
+def tratar_input_menu():
+    entrada = input("\nQual opção deseja acessar? ")
+    try:
+        entrada = int(entrada)
+        return entrada
+    except:
+        print(Fore.RED, end="")
+        print("\n{} NÃO É UMA ENTRADA VÁLIDA\n".format(entrada))
+        print(Style.RESET_ALL, end="")
+        return 0
+
+
+def erro_escolha_novamente():
+    print(Fore.RED, end="")
+    print("\nESCOLHA UMA OPÇÃO DO MENU\n")
+    print(Style.RESET_ALL, end="")
+
+
 def escolhas_inicial():
     print(Fore.LIGHTWHITE_EX, end="")
     print("(1) Cadastrar um novo Quadro")
     print("(2) Acessar um Quadro")
     print("(5) Sair do Programa")
 
-    return int(input("\nQual opção deseja acessar? "))
+    return tratar_input_menu()
 
 
 def escolhas():
@@ -61,7 +80,7 @@ def escolhas():
     print("(4) Acessar outro Quadro")
     print("(5) Sair do Programa")
 
-    return int(input("\nQual opção deseja acessar? "))
+    return tratar_input_menu()
 
 
 def escolhas_editar_postIt(postIt: PostIt):
@@ -73,7 +92,7 @@ def escolhas_editar_postIt(postIt: PostIt):
     print("(4) Alterar Data Limite")
     print("(5) Sair Edição")
 
-    return int(input("\nQual opção deseja acessar? "))
+    return tratar_input_menu()
 
 
 def cadastrar_quadro():
